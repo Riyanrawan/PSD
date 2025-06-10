@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengelola Penjualan Saldo DANA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>💰 Pengelola Penjualan Saldo DANA</h2>
+
+    <div class="config-section">
+      <h3>⚙️ Konfigurasi</h3>
+      <div class="form-group">
+        <label for="modalAwal">Modal Awal (Rp):</label>
+        <input type="number" id="modalAwal" value="150000" min="0">
+      </div>
+      <div class="form-group">
+        <label for="biayaAdmin">Biaya Admin per Transaksi (Rp):</label>
+        <input type="number" id="biayaAdmin" value="3000" min="0">
+      </div>
+    </div>
+
+    <div class="transaction-section">
+      <h3>➕ Tambah Transaksi</h3>
+      <div class="transaction-form">
+        <div class="form-group" style="flex: 1; margin-bottom: 0;">
+          <label for="saldoDijual">Nominal Saldo Dijual (Rp):</label>
+          <input type="number" id="saldoDijual" min="1" placeholder="Masukkan nominal saldo">
+        </div>
+        <button onclick="tambahTransaksi()">Tambah Transaksi</button>
+      </div>
+
+      <h3>📝 Riwayat Transaksi:</h3>
+      <ul id="daftarTransaksi">
+        <li style="text-align: center; color: #6c757d; font-style: italic;">Belum ada transaksi</li>
+      </ul>
+    </div>
+
+    <div class="summary-section">
+      <h3>📊 Ringkasan Keuangan</h3>
+      <div id="ringkasan">
+        <strong>Modal Tersisa:</strong> Rp150.000<br>
+        <strong>Total Saldo Terjual:</strong> Rp0<br>
+        <strong>Total Pendapatan Bersih:</strong> Rp0
+      </div>
+    </div>
+
+    <div class="admin-section">
+      <h3>🔐 Admin Database Access</h3>
+      <div id="adminLogin" class="admin-login">
+        <div class="form-group">
+          <label for="adminPassword">Password Admin:</label>
+          <input type="password" id="adminPassword" placeholder="Masukkan password admin">
+        </div>
+        <button onclick="loginAdmin()">Login Admin</button>
+      </div>
+      
+      <div id="adminPanel" class="admin-panel" style="display: none;">
+        <div class="admin-controls">
+          <button onclick="viewDatabase()">📊 Lihat Database</button>
+          <button onclick="exportDatabase()">💾 Export Database</button>
+          <button onclick="clearDatabase()">🗑️ Clear Database</button>
+          <button onclick="logoutAdmin()">🚪 Logout</button>
+        </div>
+        
+        <div id="databaseView" class="database-view" style="display: none;">
+          <h4>📋 Data Transaksi:</h4>
+          <div class="database-stats">
+            <div class="stat-item">
+              <strong>Total Transaksi:</strong> <span id="dbTotalTransaksi">0</span>
+            </div>
+            <div class="stat-item">
+              <strong>Total Saldo Terjual:</strong> Rp<span id="dbTotalSaldo">0</span>
+            </div>
+            <div class="stat-item">
+              <strong>Total Pendapatan:</strong> Rp<span id="dbTotalPendapatan">0</span>
+            </div>
+          </div>
+          <div id="databaseTable">
+            <table id="transactionTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Waktu</th>
+                  <th>Saldo Dijual</th>
+                  <th>Biaya Admin</th>
+                  <th>Modal Tersisa</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="debugger-section">
+      <h3>🐛 Debugger & Monitor</h3>
+      <div class="debugger-controls">
+        <button onclick="toggleDebugger()" id="debugToggle">Aktifkan Debug Mode</button>
+        <button onclick="clearDebugLog()">Clear Log</button>
+        <button onclick="exportDebugData()">Export Data</button>
+      </div>
+      
+      <div id="debugPanel" class="debug-panel" style="display: none;">
+        <div class="debug-variables">
+          <h4>📊 Variable Monitor:</h4>
+          <div id="variableWatch">
+            <div class="var-item"><strong>Modal:</strong> <span id="debugModal">150000</span></div>
+            <div class="var-item"><strong>Pendapatan:</strong> <span id="debugPendapatan">0</span></div>
+            <div class="var-item"><strong>Saldo Terjual:</strong> <span id="debugSaldoTerjual">0</span></div>
+            <div class="var-item"><strong>Jumlah Transaksi:</strong> <span id="debugTransaksi">0</span></div>
+          </div>
+        </div>
+        
+        <div class="debug-log">
+          <h4>📝 Activity Log:</h4>
+          <div id="debugLog">
+            <div class="log-item">Debug mode activated</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  
+  <footer class="developer-credit">
+    <p>👨‍💻 Developed by <strong>Riyan Irawan004</strong></p>
+  </footer>
+</body>
+</html>
